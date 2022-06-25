@@ -1,9 +1,18 @@
 import { useRecoilState } from "recoil";
+import { todoListState } from "./store/TodoListState";
 
-function TodoItem({ item }) {
+function replaceItemAtIndex(arr, index, newValue) {
+  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+}
+
+function removeItemAtIndex(arr, index) {
+  return [...arr.slice(0, index), ...arr.slice(index + 1)];
+}
+
+export function TodoItem({ item }) {
   const [todoList, setTodoList] = useRecoilState(todoListState);
   const index = todoList.findIndex((listItem) => listItem === item);
-
+  console.log("子レンダ");
   const editItemText = ({ target: { value } }) => {
     const newList = replaceItemAtIndex(todoList, index, {
       ...item,
@@ -18,6 +27,11 @@ function TodoItem({ item }) {
       ...item,
       isComplete: !item.isComplete
     });
+
+    console.log(todoList);
+    console.log(index);
+    console.log(item);
+    console.log(newList);
 
     setTodoList(newList);
   };
@@ -39,12 +53,4 @@ function TodoItem({ item }) {
       <button onClick={deleteItem}>X</button>
     </div>
   );
-}
-
-function replaceItemAtIndex(arr, index, newValue) {
-  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-}
-
-function removeItemAtIndex(arr, index) {
-  return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }

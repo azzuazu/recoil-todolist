@@ -9,8 +9,8 @@ const root = ReactDOMClient.createRoot(rootElement);
 
 root.render(
   <RecoilRoot>
-    <StrictMode>
-      <App />
-    </StrictMode>
+    {/* <StrictMode> */}
+    <App />
+    {/* </StrictMode> */}
   </RecoilRoot>
 );
